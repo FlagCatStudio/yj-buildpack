@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+set -eo pipefail
+
+echo "---> yj buildpack"
+
+yj_version="5.1.0"
+yj_url="https://github.com/sclevine/yj/releases/download"
+yj_url="${yj_url}/v${yj_version}/yj-linux-amd64"
+
+yj_layer="${CNB_LAYERS_DIR}/yj"
+yj_cfg="${CNB_LAYERS_DIR}/yj.toml"
+yj_binary="${yj_layer}/bin/yj"
+
+mkdir -p "${yj_layer}"/bin
+
+if [[ -x $yj_binary ]]; then
+    cached_version=$($yj_binary -v)
+else
+    cached_version='_nope_'
+fi
+
+if [[ $cached_version == "v${yj_version}" ]]; then
+    echo "-----> Reusing yj"
+else
+    echo "-----> Downloading yj ${yj_version}"
+    wget -q "${yj_url}" -O "${yj_binary}"
+    chmod +x "${yj_binary}"
+fi
+
+cat > "${yj_cfg}" << EOF
+[types]
+  cache = true
+  build = true
+  launch = true
+[metadata]
+  yj_version = "${yj_version}"
+EOF
+
+exit 0

@@ -1,0 +1,16 @@
+api = "0.10"
+
+WithWindowsBuild = false
+WithLinuxBuild = false
+
+[buildpack]
+id = "github.com/flagcatstudio/yj-buildpack"
+name = "yj-buildpack"
+version = "0.0.1"
+
+[[stacks]]
+  id = "*"
+
+[[targets]]
+  os = "linux"
+  arch = "amd64"

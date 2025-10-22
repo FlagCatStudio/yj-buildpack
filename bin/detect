@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+
+cat >> "${CNB_BUILD_PLAN_PATH}" << EOF
+[[requires]]
+  name = "yj"
+[[provides]]
+  name = "yj"
+EOF
+
+# This build pack is always enabled
+echo "yj"
+
+exit 0
