@@ -4,7 +4,7 @@ WithWindowsBuild = false
 WithLinuxBuild = false
 
 [buildpack]
-id = "github.com/flagcatstudio/yj-buildpack"
+id = "flagcatstudio/yj-buildpack"
 name = "yj-buildpack"
 version = "0.0.1"
 
